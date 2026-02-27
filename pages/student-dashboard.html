@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | Online Examination System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./../css/styles.css">
+    <style>
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.35s ease-out; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(14px);} to {opacity:1; transform:translateY(0);} }
+    </style>
+</head>
+<body>
+
+    <!-- GLOBAL NAVBAR -->
+    <nav class="global-nav">
+        <div class="global-nav-inner">
+            <div class="gnav-brand" onclick="window.location='index.html'">
+                <div class="gnav-logo">📚</div>
+                <div class="gnav-title">Online Exam System<span>ACS College, Sonai</span></div>
+            </div>
+            <ul class="gnav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><button id="studentGreeting" style="color:rgba(255,255,255,0.65);font-size:0.85rem;font-weight:500;background:none;border:none;cursor:default;font-family:inherit;padding:0.45rem 0.85rem;"></button></li>
+                <li><button onclick="showPage('dashboardPage')">📋 My Exams</button></li>
+                <li><button class="gnav-cta" onclick="studentLogout()">Logout →</button></li>
+            </ul>
+            <button class="gnav-hamburger" id="gnavHamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="gnav-mobile" id="gnavMobile">
+            <ul>
+                <li><a href="./../index.html" onclick="closeNav()">🏠 Home</a></li>
+                <li><button onclick="showPage('dashboardPage'); closeNav()">📋 My Exams</button></li>
+            </ul>
+            <button class="gnav-mobile-cta" onclick="studentLogout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Student Portal</h1>
+            <p id="headerStudentName">Arts, Commerce & Science College, Sonai</p>
+        </div>
+        <div id="notificationArea"></div>
+
+        <!-- ===== DASHBOARD PAGE ===== -->
+        <div id="dashboardPage" class="page active">
+            <div class="navbar">
+                <div class="navbar-brand">Student Dashboard</div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" id="navStudentName"></div>
+                    <div class="navbar-item" onclick="studentLogout()">Logout</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2 style="margin-bottom:30px;">Available Examinations</h2>
+                <div id="availableExamsContainer" class="card-grid"></div>
+                <h2 style="margin-top:50px;margin-bottom:30px;">My Results</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Exam Name</th><th>Subject</th><th>Marks Obtained</th>
+                                <th>Total Marks</th><th>Percentage</th><th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentResultsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== EXAM PAGE ===== -->
+        <div id="examPage" class="page">
+            <div class="timer" id="examTimer">Time: 00:00</div>
+            <div class="navbar">
+                <div class="navbar-brand" id="examTitle"></div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" id="questionProgress">Question 0/0</div>
+                </div>
+            </div>
+            <div class="content">
+                <div id="examQuestionsContainer"></div>
+                <button class="btn btn-success" onclick="submitExam()">Submit Exam</button>
+            </div>
+        </div>
+
+        <!-- ===== RESULT PAGE ===== -->
+        <div id="resultPage" class="page">
+            <div class="content">
+                <div class="result-card">
+                    <h2>🎉 Exam Completed!</h2>
+                    <p id="resultExamName"></p>
+                    <p id="resultMarks"></p>
+                    <p id="resultPercentage"></p>
+                    <p id="resultStatus"></p>
+                </div>
+                <button class="btn" onclick="showPage('dashboardPage')">Back to Dashboard</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="gnav-logo">📚</div>
+                    <div class="footer-brand-name">Online Examination System</div>
+                    <div class="footer-brand-sub">Arts, Commerce & Science College, Sonai · SPPU</div>
+                    <p>A secure and easy-to-use online examination portal.</p>
+                    <div class="footer-makers">
+                        <div class="footer-makers-label">✨ Made with ❤️ by</div>
+                        <div class="footer-makers-names">
+                            <span class="maker-pill">👨‍💻 Mayur</span>
+                            <span class="maker-amp">&amp;</span>
+                            <span class="maker-pill">👨‍💻 Aniket</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-col-title">Navigate</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./../index.html">🏠 Home</a></li>
+                        <li><button onclick="showPage('dashboardPage')">📋 My Dashboard</button></li>
+                        <li><button onclick="studentLogout()">🚪 Logout</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Help</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./student-login.html">🔑 Login Again</a></li>
+                        <li><a href="./student-register.html">📝 Register</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Admin</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./admin-login.html">🔐 Admin Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Online Exam System · ACS College, Sonai</p>
+                <div class="footer-bottom-links">
+                    <a href="./../index.html">Home</a>
+                    <a href="./student-login.html">Student Login</a>
+                    <a href="./admin-login.html">Admin</a>
+                    <a href="./pages/about.html">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./../js/shared.js"></script>
+    <script>
+        let examTimerInterval = null;
+
+        // ===== AUTH GUARD =====
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!appState.currentStudent) {
+                window.location = 'student-login.html';
+                return;
+            }
+            // Set greetings
+            const name = appState.currentStudent.name;
+            const greet = document.getElementById('studentGreeting');
+            if (greet) greet.textContent = `👋 ${name}`;
+            const navName = document.getElementById('navStudentName');
+            if (navName) navName.textContent = name;
+            const headerName = document.getElementById('headerStudentName');
+            if (headerName) headerName.textContent = `Welcome, ${name}`;
+
+            loadStudentData();
+        });
+
+        // ===== PAGE ROUTING =====
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            if (pageId === 'dashboardPage') loadStudentData();
+        }
+
+        function studentLogout() {
+            appState.currentStudent = null;
+            appState.currentExam    = null;
+            clearInterval(examTimerInterval);
+            saveSession();
+            window.location = 'index.html';
+        }
+
+        // ===== STUDENT DASHBOARD DATA =====
+        function loadStudentData() {
+            if (!appState.currentStudent) return;
+            const rollNo = appState.currentStudent.rollNo;
+
+            // Available exams
+            const container = document.getElementById('availableExamsContainer');
+            container.innerHTML = '';
+            let hasExams = false;
+
+            appState.exams.forEach(exam => {
+                const examQuestions   = appState.questions.filter(q => q.examId === exam.id);
+                const alreadyAttempted = appState.results.find(r => r.studentRollNo === rollNo && r.examId === exam.id);
+                if (examQuestions.length === 0) return;
+
+                hasExams = true;
+                const card = document.createElement('div');
+                card.className = 'exam-card';
+                card.innerHTML = `
+                    <h3>${exam.name}</h3>
+                    <p><strong>Subject:</strong> ${exam.subject}</p>
+                    <p><strong>Duration:</strong> ${exam.duration} minutes</p>
+                    <p><strong>Total Marks:</strong> ${exam.totalMarks}</p>
+                    <p><strong>Questions:</strong> ${examQuestions.length}</p>
+                    ${alreadyAttempted
+                        ? '<p class="completed">✅ Completed</p>'
+                        : `<button class="btn" onclick="startExam('${exam.id}')">Start Exam</button>`
+                    }
+                `;
+                container.appendChild(card);
+            });
+
+            if (!hasExams) {
+                container.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>No exams available at the moment.</p></div>';
+            }
+
+            // My results
+            const tbody = document.getElementById('studentResultsTableBody');
+            tbody.innerHTML = '';
+            const studentResults = appState.results.filter(r => r.studentRollNo === rollNo);
+
+            if (studentResults.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">No results yet. Complete exams to see results here.</td></tr>';
+                return;
+            }
+            studentResults.forEach(result => {
+                const exam       = appState.exams.find(e => e.id === result.examId);
+                const percentage = ((result.marksObtained / result.totalMarks) * 100).toFixed(2);
+                const status     = percentage >= 40 ? 'Pass' : 'Fail';
+                const color      = percentage >= 40 ? '#10b981' : '#f43f5e';
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${exam ? exam.name : 'Unknown'}</td>
+                    <td>${exam ? exam.subject : 'Unknown'}</td>
+                    <td>${result.marksObtained}</td>
+                    <td>${result.totalMarks}</td>
+                    <td>${percentage}%</td>
+                    <td style="color:${color};font-weight:bold;">${status}</td>`;
+            });
+        }
+
+        // ===== START EXAM =====
+        function startExam(examId) {
+            appState.currentExam = appState.exams.find(e => e.id === examId);
+            saveSession();
+            const examQuestions = appState.questions.filter(q => q.examId === examId);
+
+            if (examQuestions.length === 0) {
+                showNotification('No questions available for this exam!', 'error'); return;
+            }
+
+            appState.examTimeRemaining = appState.currentExam.duration * 60;
+            document.getElementById('examTitle').textContent       = appState.currentExam.name;
+            document.getElementById('questionProgress').textContent = `Question 0/${examQuestions.length}`;
+
+            const container = document.getElementById('examQuestionsContainer');
+            container.innerHTML = '';
+
+            examQuestions.forEach((q, index) => {
+                const questionCard = document.createElement('div');
+                questionCard.className = 'question-card';
+                questionCard.innerHTML = `
+                    <div class="question-number">Question ${index + 1} of ${examQuestions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="option-group">
+                        <input type="radio" name="question_${q.id}" value="A" id="q${q.id}_a" onchange="updateExamProgress()">
+                        <label for="q${q.id}_a">A) ${q.optionA}</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="question_${q.id}" value="B" id="q${q.id}_b" onchange="updateExamProgress()">
+                        <label for="q${q.id}_b">B) ${q.optionB}</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="question_${q.id}" value="C" id="q${q.id}_c" onchange="updateExamProgress()">
+                        <label for="q${q.id}_c">C) ${q.optionC}</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="question_${q.id}" value="D" id="q${q.id}_d" onchange="updateExamProgress()">
+                        <label for="q${q.id}_d">D) ${q.optionD}</label>
+                    </div>
+                `;
+                container.appendChild(questionCard);
+            });
+
+            showPage('examPage');
+            startExamTimer();
+        }
+
+        function updateExamProgress() {
+            const examQuestions = appState.questions.filter(q => q.examId === appState.currentExam.id);
+            let answered = 0;
+            examQuestions.forEach(q => {
+                if (document.querySelector(`input[name="question_${q.id}"]:checked`)) answered++;
+            });
+            document.getElementById('questionProgress').textContent = `Question ${answered}/${examQuestions.length}`;
+        }
+
+        function startExamTimer() {
+            clearInterval(examTimerInterval);
+            examTimerInterval = setInterval(() => {
+                appState.examTimeRemaining--;
+                const mins = Math.floor(appState.examTimeRemaining / 60);
+                const secs = appState.examTimeRemaining % 60;
+                document.getElementById('examTimer').textContent =
+                    `Time: ${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+
+                if (appState.examTimeRemaining <= 0) {
+                    clearInterval(examTimerInterval);
+                    showNotification('Time is up! Submitting your exam automatically.', 'info');
+                    setTimeout(() => submitExam(true), 1000);
+                }
+            }, 1000);
+        }
+
+        function submitExam(autoSubmit = false) {
+            if (!autoSubmit && !confirm('Are you sure you want to submit the exam? This action cannot be undone.')) return;
+
+            clearInterval(examTimerInterval);
+
+            const examQuestions = appState.questions.filter(q => q.examId === appState.currentExam.id);
+            let marksObtained = 0, totalMarks = 0;
+
+            examQuestions.forEach(q => {
+                totalMarks += q.marks;
+                const answer = document.querySelector(`input[name="question_${q.id}"]:checked`);
+                if (answer && answer.value === q.correctAnswer) marksObtained += q.marks;
+            });
+
+            const result = {
+                studentRollNo: appState.currentStudent.rollNo,
+                examId:        appState.currentExam.id,
+                marksObtained, totalMarks,
+                date: new Date().toISOString()
+            };
+            appState.results.push(result);
+            saveDataToStorage();
+
+            const percentage = ((marksObtained / totalMarks) * 100).toFixed(2);
+            const status     = percentage >= 40 ? 'Pass ✅' : 'Fail ❌';
+
+            document.getElementById('resultExamName').textContent  = `Exam: ${appState.currentExam.name}`;
+            document.getElementById('resultMarks').textContent     = `Marks Obtained: ${marksObtained}/${totalMarks}`;
+            document.getElementById('resultPercentage').textContent = `Percentage: ${percentage}%`;
+            document.getElementById('resultStatus').textContent    = `Status: ${status}`;
+
+            showPage('resultPage');
+        }
+    </script>
+</body>
+</html>

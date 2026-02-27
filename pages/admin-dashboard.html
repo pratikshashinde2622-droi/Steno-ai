@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Online Examination System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./../css/styles.css">
+    <style>
+        .page { display: none; }
+        .page.active { display: block; animation: fadeIn 0.35s ease-out; }
+        @keyframes fadeIn { from { opacity:0; transform:translateY(14px);} to {opacity:1; transform:translateY(0);} }
+    </style>
+</head>
+<body>
+
+    <!-- GLOBAL NAVBAR -->
+    <nav class="global-nav">
+        <div class="global-nav-inner">
+            <div class="gnav-brand" onclick="window.location='index.html'">
+                <div class="gnav-logo">📚</div>
+                <div class="gnav-title">Online Exam System<span>ACS College, Sonai</span></div>
+            </div>
+            <ul class="gnav-links">
+                <li><a href="./../index.html">🏠 Home</a></li>
+                <li><button onclick="showPage('dashboardPage')">📊 Dashboard</button></li>
+                <li><button onclick="showPage('studentsPage')">👥 Students</button></li>
+                <li><button onclick="showPage('examsPage')">📚 Exams</button></li>
+                <li><button onclick="showPage('questionsPage')">❓ Questions</button></li>
+                <li><button onclick="showPage('resultsPage')">📈 Results</button></li>
+                <li><button class="gnav-cta" onclick="adminLogout()">Logout →</button></li>
+            </ul>
+            <button class="gnav-hamburger" id="gnavHamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="gnav-mobile" id="gnavMobile">
+            <ul>
+                <li><a href="./../index.html" onclick="closeNav()">🏠 Home</a></li>
+                <li><button onclick="showPage('dashboardPage'); closeNav()">📊 Dashboard</button></li>
+                <li><button onclick="showPage('studentsPage'); closeNav()">👥 Students</button></li>
+                <li><button onclick="showPage('examsPage'); closeNav()">📚 Exams</button></li>
+                <li><button onclick="showPage('questionsPage'); closeNav()">❓ Questions</button></li>
+                <li><button onclick="showPage('resultsPage'); closeNav()">📈 Results</button></li>
+            </ul>
+            <button class="gnav-mobile-cta" onclick="adminLogout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Admin Dashboard</h1>
+            <p>Arts, Commerce & Science College, Sonai</p>
+        </div>
+        <div id="notificationArea"></div>
+
+        <!-- ===== DASHBOARD PAGE ===== -->
+        <div id="dashboardPage" class="page active">
+            <div class="navbar">
+                <div class="navbar-brand">Dashboard Overview</div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" onclick="adminLogout()">Logout</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2 style="margin-bottom:30px;">Dashboard Overview</h2>
+                <div class="dashboard">
+                    <div class="dashboard-card" onclick="showPage('studentsPage')">
+                        <h3 id="studentCount">0</h3>
+                        <p>Total Students</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showPage('examsPage')">
+                        <h3 id="examCount">0</h3>
+                        <p>Total Exams</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showPage('questionsPage')">
+                        <h3 id="questionCount">0</h3>
+                        <p>Total Questions</p>
+                    </div>
+                    <div class="dashboard-card" onclick="showPage('resultsPage')">
+                        <h3 id="resultCount">0</h3>
+                        <p>Total Results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== STUDENTS PAGE ===== -->
+        <div id="studentsPage" class="page">
+            <div class="navbar">
+                <div class="navbar-brand">Manage Students</div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" onclick="showPage('dashboardPage')">Dashboard</div>
+                    <div class="navbar-item" onclick="adminLogout()">Logout</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2 style="margin-bottom:30px;">Student Management</h2>
+                <button class="btn" onclick="openModal('addStudentModal')">Add New Student</button>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Roll No</th><th>Name</th><th>Email</th><th>Contact</th><th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== EXAMS PAGE ===== -->
+        <div id="examsPage" class="page">
+            <div class="navbar">
+                <div class="navbar-brand">Manage Exams</div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" onclick="showPage('dashboardPage')">Dashboard</div>
+                    <div class="navbar-item" onclick="adminLogout()">Logout</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2 style="margin-bottom:30px;">Exam Management</h2>
+                <button class="btn" onclick="openModal('addExamModal')">Create New Exam</button>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Exam ID</th><th>Exam Name</th><th>Subject</th>
+                                <th>Duration (mins)</th><th>Total Marks</th><th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="examsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== QUESTIONS PAGE ===== -->
+        <div id="questionsPage" class="page">
+            <div class="navbar">
+                <div class="navbar-brand">Manage Questions</div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" onclick="showPage('dashboardPage')">Dashboard</div>
+                    <div class="navbar-item" onclick="adminLogout()">Logout</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2 style="margin-bottom:30px;">Question Bank</h2>
+                <button class="btn" onclick="openModal('addQuestionModal')">Add New Question</button>
+                <div id="questionsContainer"></div>
+            </div>
+        </div>
+
+        <!-- ===== RESULTS PAGE ===== -->
+        <div id="resultsPage" class="page">
+            <div class="navbar">
+                <div class="navbar-brand">View Results</div>
+                <div class="navbar-menu">
+                    <div class="navbar-item" onclick="showPage('dashboardPage')">Dashboard</div>
+                    <div class="navbar-item" onclick="adminLogout()">Logout</div>
+                </div>
+            </div>
+            <div class="content">
+                <h2 style="margin-bottom:30px;">Examination Results</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student Name</th><th>Roll No</th><th>Exam Name</th>
+                                <th>Marks Obtained</th><th>Total Marks</th><th>Percentage</th><th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODALS ===== -->
+
+    <!-- Add Student Modal -->
+    <div id="addStudentModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom:30px;">Add New Student</h2>
+            <div class="form-group"><label>Roll Number</label><input type="text" id="newStudentRollNo" placeholder="Enter roll number"></div>
+            <div class="form-group"><label>Name</label><input type="text" id="newStudentName" placeholder="Enter student name"></div>
+            <div class="form-group"><label>Email</label><input type="email" id="newStudentEmail" placeholder="Enter email"></div>
+            <div class="form-group"><label>Contact</label><input type="text" id="newStudentContact" placeholder="Enter contact number"></div>
+            <div class="form-group"><label>Password</label><input type="password" id="newStudentPassword" placeholder="Enter password"></div>
+            <button class="btn" onclick="addStudent()">Add Student</button>
+            <button class="btn btn-secondary" onclick="closeModal('addStudentModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Add Exam Modal -->
+    <div id="addExamModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom:30px;">Create New Exam</h2>
+            <div class="form-group"><label>Exam Name</label><input type="text" id="newExamName" placeholder="Enter exam name"></div>
+            <div class="form-group"><label>Subject</label><input type="text" id="newExamSubject" placeholder="Enter subject"></div>
+            <div class="form-group"><label>Duration (minutes)</label><input type="number" id="newExamDuration" placeholder="Enter duration"></div>
+            <div class="form-group"><label>Total Marks</label><input type="number" id="newExamMarks" placeholder="Enter total marks"></div>
+            <button class="btn" onclick="addExam()">Create Exam</button>
+            <button class="btn btn-secondary" onclick="closeModal('addExamModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Add Question Modal -->
+    <div id="addQuestionModal" class="modal">
+        <div class="modal-content">
+            <h2 style="margin-bottom:30px;">Add New Question</h2>
+            <div class="form-group">
+                <label>Select Exam</label>
+                <select id="questionExamId"><option value="">Select an exam</option></select>
+            </div>
+            <div class="form-group"><label>Question Text</label><textarea id="newQuestionText" rows="3" placeholder="Enter question"></textarea></div>
+            <div class="form-group"><label>Option A</label><input type="text" id="newQuestionOptionA" placeholder="Enter option A"></div>
+            <div class="form-group"><label>Option B</label><input type="text" id="newQuestionOptionB" placeholder="Enter option B"></div>
+            <div class="form-group"><label>Option C</label><input type="text" id="newQuestionOptionC" placeholder="Enter option C"></div>
+            <div class="form-group"><label>Option D</label><input type="text" id="newQuestionOptionD" placeholder="Enter option D"></div>
+            <div class="form-group">
+                <label>Correct Answer</label>
+                <select id="newQuestionCorrectAnswer">
+                    <option value="A">Option A</option><option value="B">Option B</option>
+                    <option value="C">Option C</option><option value="D">Option D</option>
+                </select>
+            </div>
+            <div class="form-group"><label>Marks</label><input type="number" id="newQuestionMarks" placeholder="Enter marks" value="1"></div>
+            <button class="btn" onclick="addQuestion()">Add Question</button>
+            <button class="btn btn-secondary" onclick="closeModal('addQuestionModal')">Cancel</button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="gnav-logo">📚</div>
+                    <div class="footer-brand-name">Online Examination System</div>
+                    <div class="footer-brand-sub">Arts, Commerce & Science College, Sonai · SPPU</div>
+                    <p>A secure and easy-to-use online examination portal.</p>
+                    <div class="footer-makers">
+                        <div class="footer-makers-label">✨ Made with ❤️ by</div>
+                        <div class="footer-makers-names">
+                            <span class="maker-pill">👨‍💻 Mayur</span>
+                            <span class="maker-amp">&amp;</span>
+                            <span class="maker-pill">👨‍💻 Aniket</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-col-title">Navigate</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./../index.html">🏠 Home</a></li>
+                        <li><button onclick="showPage('studentsPage')">👥 Manage Students</button></li>
+                        <li><button onclick="showPage('examsPage')">📚 Manage Exams</button></li>
+                        <li><button onclick="showPage('questionsPage')">❓ Manage Questions</button></li>
+                        <li><button onclick="showPage('resultsPage')">📈 View Results</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Students</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./student-login.html">📋 New Registration</a></li>
+                        <li><a href="./student-login.html">🔑 Student Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Admin</div>
+                    <ul class="footer-col-links">
+                        <li><button onclick="showPage('dashboardPage')">📊 Dashboard</button></li>
+                        <li><button onclick="adminLogout()">🚪 Logout</button></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Online Exam System · ACS College, Sonai</p>
+                <div class="footer-bottom-links">
+                    <a href="./../index.html">Home</a>
+                    <a href="./student-login.html">Student Login</a>
+                    <a href="./admin-login.html">Admin Login</a>
+                    <a href="./pages/about.html">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./../js/shared.js"></script>
+    <script>
+        // ===== PAGE ROUTING =====
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            if (pageId === 'dashboardPage') updateDashboardStats();
+            else if (pageId === 'studentsPage')  loadStudentsTable();
+            else if (pageId === 'examsPage')     loadExamsTable();
+            else if (pageId === 'questionsPage') { loadQuestionsView(); loadExamOptionsForQuestions(); }
+            else if (pageId === 'resultsPage')   loadResultsTable();
+        }
+
+        function adminLogout() {
+            sessionStorage.removeItem('adminLoggedIn');
+            window.location = 'index.html';
+        }
+
+        // ===== AUTH GUARD =====
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!sessionStorage.getItem('adminLoggedIn')) {
+                window.location = 'admin-login.html';
+                return;
+            }
+            updateDashboardStats();
+        });
+
+        // ===== DASHBOARD =====
+        function updateDashboardStats() {
+            document.getElementById('studentCount').textContent  = appState.students.length;
+            document.getElementById('examCount').textContent     = appState.exams.length;
+            document.getElementById('questionCount').textContent = appState.questions.length;
+            document.getElementById('resultCount').textContent   = appState.results.length;
+        }
+
+        // ===== STUDENTS =====
+        function loadStudentsTable() {
+            const tbody = document.getElementById('studentsTableBody');
+            tbody.innerHTML = '';
+            if (appState.students.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;padding:40px;">No students found.</td></tr>';
+                return;
+            }
+            appState.students.forEach((s, i) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `<td>${s.rollNo}</td><td>${s.name}</td><td>${s.email}</td><td>${s.contact}</td>
+                    <td><button class="btn btn-danger btn-small" onclick="deleteStudent(${i})">Delete</button></td>`;
+            });
+        }
+
+        function addStudent() {
+            const rollNo   = document.getElementById('newStudentRollNo').value.trim();
+            const name     = document.getElementById('newStudentName').value.trim();
+            const email    = document.getElementById('newStudentEmail').value.trim();
+            const contact  = document.getElementById('newStudentContact').value.trim();
+            const password = document.getElementById('newStudentPassword').value.trim();
+
+            if (!rollNo || !name || !email || !contact || !password) {
+                showNotification('Please fill all fields!', 'error'); return;
+            }
+            if (appState.students.find(s => s.rollNo === rollNo)) {
+                showNotification('Student with this roll number already exists!', 'error'); return;
+            }
+            appState.students.push({ rollNo, name, email, contact, password });
+            saveDataToStorage();
+            closeModal('addStudentModal');
+            loadStudentsTable();
+            updateDashboardStats();
+            showNotification('Student added successfully!', 'success');
+            ['newStudentRollNo','newStudentName','newStudentEmail','newStudentContact','newStudentPassword']
+                .forEach(id => document.getElementById(id).value = '');
+        }
+
+        function deleteStudent(index) {
+            if (confirm('Are you sure you want to delete this student?')) {
+                const student = appState.students[index];
+                appState.students.splice(index, 1);
+                saveDataToStorage();
+                loadStudentsTable();
+                updateDashboardStats();
+                showNotification(`Student ${student.name} deleted successfully!`, 'info');
+            }
+        }
+
+        // ===== EXAMS =====
+        function loadExamsTable() {
+            const tbody = document.getElementById('examsTableBody');
+            tbody.innerHTML = '';
+            if (appState.exams.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:40px;">No exams found.</td></tr>';
+                return;
+            }
+            appState.exams.forEach((e, i) => {
+                const row = tbody.insertRow();
+                row.innerHTML = `<td>${e.id}</td><td>${e.name}</td><td>${e.subject}</td><td>${e.duration}</td><td>${e.totalMarks}</td>
+                    <td><button class="btn btn-danger btn-small" onclick="deleteExam(${i})">Delete</button></td>`;
+            });
+        }
+
+        function addExam() {
+            const name       = document.getElementById('newExamName').value.trim();
+            const subject    = document.getElementById('newExamSubject').value.trim();
+            const duration   = parseInt(document.getElementById('newExamDuration').value);
+            const totalMarks = parseInt(document.getElementById('newExamMarks').value);
+
+            if (!name || !subject || !duration || !totalMarks) {
+                showNotification('Please fill all fields!', 'error'); return;
+            }
+            const id = 'EX' + String(appState.exams.length + 1).padStart(3, '0');
+            appState.exams.push({ id, name, subject, duration, totalMarks });
+            saveDataToStorage();
+            closeModal('addExamModal');
+            loadExamsTable();
+            updateDashboardStats();
+            showNotification('Exam created successfully!', 'success');
+            ['newExamName','newExamSubject','newExamDuration','newExamMarks']
+                .forEach(id => document.getElementById(id).value = '');
+        }
+
+        function deleteExam(index) {
+            if (confirm('Are you sure you want to delete this exam? All related questions will also be deleted.')) {
+                const exam = appState.exams[index];
+                appState.exams.splice(index, 1);
+                appState.questions = appState.questions.filter(q => q.examId !== exam.id);
+                saveDataToStorage();
+                loadExamsTable();
+                updateDashboardStats();
+                showNotification(`Exam "${exam.name}" deleted successfully!`, 'info');
+            }
+        }
+
+        // ===== QUESTIONS =====
+        function loadExamOptionsForQuestions() {
+            const select = document.getElementById('questionExamId');
+            select.innerHTML = '<option value="">Select an exam</option>';
+            appState.exams.forEach(e => {
+                const opt = document.createElement('option');
+                opt.value = e.id;
+                opt.textContent = `${e.name} (${e.subject})`;
+                select.appendChild(opt);
+            });
+        }
+
+        function loadQuestionsView() {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+            if (appState.questions.length === 0) {
+                container.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>No questions added yet.</p></div>';
+                return;
+            }
+            appState.exams.forEach(exam => {
+                const examQuestions = appState.questions.filter(q => q.examId === exam.id);
+                if (examQuestions.length === 0) return;
+                let html = `<h3>${exam.name}</h3>`;
+                examQuestions.forEach((q, i) => {
+                    html += `<div class="question-card">
+                        <div class="question-number">Question ${i + 1}</div>
+                        <div class="question-text">${q.question}</div>
+                        <div style="margin-left:20px;">
+                            <p><strong>A)</strong> ${q.optionA} ${q.correctAnswer==='A'?'✅':''}</p>
+                            <p><strong>B)</strong> ${q.optionB} ${q.correctAnswer==='B'?'✅':''}</p>
+                            <p><strong>C)</strong> ${q.optionC} ${q.correctAnswer==='C'?'✅':''}</p>
+                            <p><strong>D)</strong> ${q.optionD} ${q.correctAnswer==='D'?'✅':''}</p>
+                        </div>
+                        <p style="margin-top:15px;"><strong>Marks:</strong> ${q.marks}</p>
+                        <button class="btn btn-danger btn-small" onclick="deleteQuestion('${q.id}')">Delete</button>
+                    </div>`;
+                });
+                container.innerHTML += html;
+            });
+        }
+
+        function addQuestion() {
+            const examId        = document.getElementById('questionExamId').value;
+            const question      = document.getElementById('newQuestionText').value.trim();
+            const optionA       = document.getElementById('newQuestionOptionA').value.trim();
+            const optionB       = document.getElementById('newQuestionOptionB').value.trim();
+            const optionC       = document.getElementById('newQuestionOptionC').value.trim();
+            const optionD       = document.getElementById('newQuestionOptionD').value.trim();
+            const correctAnswer = document.getElementById('newQuestionCorrectAnswer').value;
+            const marks         = parseInt(document.getElementById('newQuestionMarks').value);
+
+            if (!examId || !question || !optionA || !optionB || !optionC || !optionD || !marks) {
+                showNotification('Please fill all fields!', 'error'); return;
+            }
+            const id = 'Q' + String(appState.questions.length + 1).padStart(3, '0');
+            appState.questions.push({ id, examId, question, optionA, optionB, optionC, optionD, correctAnswer, marks });
+            saveDataToStorage();
+            closeModal('addQuestionModal');
+            loadQuestionsView();
+            updateDashboardStats();
+            showNotification('Question added successfully!', 'success');
+            ['questionExamId','newQuestionText','newQuestionOptionA','newQuestionOptionB','newQuestionOptionC','newQuestionOptionD']
+                .forEach(id => document.getElementById(id).value = '');
+            document.getElementById('newQuestionMarks').value = '1';
+        }
+
+        function deleteQuestion(id) {
+            if (confirm('Are you sure you want to delete this question?')) {
+                appState.questions = appState.questions.filter(q => q.id !== id);
+                saveDataToStorage();
+                loadQuestionsView();
+                updateDashboardStats();
+                showNotification('Question deleted successfully!', 'info');
+            }
+        }
+
+        // ===== RESULTS =====
+        function loadResultsTable() {
+            const tbody = document.getElementById('resultsTableBody');
+            tbody.innerHTML = '';
+            if (appState.results.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;padding:40px;">No results yet.</td></tr>';
+                return;
+            }
+            appState.results.forEach(result => {
+                const student    = appState.students.find(s => s.rollNo === result.studentRollNo);
+                const exam       = appState.exams.find(e => e.id === result.examId);
+                const percentage = ((result.marksObtained / result.totalMarks) * 100).toFixed(2);
+                const status     = percentage >= 40 ? 'Pass' : 'Fail';
+                const color      = percentage >= 40 ? '#10b981' : '#f43f5e';
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td>${student ? student.name : 'Unknown'}</td>
+                    <td>${result.studentRollNo}</td>
+                    <td>${exam ? exam.name : 'Unknown'}</td>
+                    <td>${result.marksObtained}</td>
+                    <td>${result.totalMarks}</td>
+                    <td>${percentage}%</td>
+                    <td style="color:${color};font-weight:bold;">${status}</td>`;
+            });
+        }
+    </script>
+</body>
+</html>

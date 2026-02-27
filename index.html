@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Online Examination System - ACS College Sonai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <style>
+        .hero-badge {
+            display: inline-block;
+            background: rgba(14,165,233,0.15);
+            border: 1px solid rgba(14,165,233,0.35);
+            color: var(--primary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1rem;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 60px 36px 40px;
+        }
+        .hero-section h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        .hero-section p {
+            font-size: 1.05rem;
+            color: var(--muted);
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 0 36px 40px;
+        }
+        .feature-item {
+            background: var(--white);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .feature-item .fi { font-size: 2.2rem; margin-bottom: 10px; }
+        .feature-item h4 { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+        .feature-item p  { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+    </style>
+</head>
+<body>
+
+    <!-- GLOBAL NAVBAR -->
+    <nav class="global-nav">
+        <div class="global-nav-inner">
+            <div class="gnav-brand" onclick="window.location='index.html'">
+                <div class="gnav-logo">📚</div>
+                <div class="gnav-title">
+                    Online Exam System
+                    <span>ACS College, Sonai</span>
+                </div>
+            </div>
+            <ul class="gnav-links">
+                <li><a href="./index.html">🏠 Home</a></li>
+                <li><a href="./pages/student-login.html">🎓 Student Login</a></li>
+                <li><a href="./pages/student-register.html">📝 Register</a></li>
+                <li><a href="./pages/admin-login.html">👨‍💼 Admin</a></li>
+                <li><a href="./pages/about.html">ℹ️ About</a></li>
+                <li><a class="gnav-cta" href="./pages/student-login.html">Start Exam →</a></li>
+            </ul>
+            <button class="gnav-hamburger" id="gnavHamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="gnav-mobile" id="gnavMobile">
+            <ul>
+                <li><a href="./index.html" onclick="closeNav()">🏠 Home</a></li>
+                <li><a href="./pages/student-login.html" onclick="closeNav()">🎓 Student Login</a></li>
+                <li><a href="./pages/student-register.html" onclick="closeNav()">📝 Register</a></li>
+                <li><a href="./pages/admin-login.html" onclick="closeNav()">👨‍💼 Admin Login</a></li>
+                <li><a href="./pages/about.html" onclick="closeNav()"> ℹ️ About</a></li>
+            </ul>
+            <a class="gnav-mobile-cta" href="./pages/student-login.html">🚀 Start Exam</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <div class="header">
+            <h1>📚 Online Examination System</h1>
+            <p>Arts, Commerce & Science College, Sonai</p>
+            <p>Savitribai Phule Pune University</p>
+        </div>
+
+        <div id="notificationArea"></div>
+
+        <!-- Hero -->
+        <div class="hero-section">
+            <div class="hero-badge">Welcome to the Portal</div>
+            <h2>Welcome to Online Examination Portal</h2>
+            <p>A secure and easy-to-use platform to take exams and manage results.</p>
+        </div>
+
+        <!-- Login Options -->
+        <div class="login-options" style="padding: 0 36px 40px;">
+            <div class="option-card" onclick="window.location='admin-login.html'">
+                <div class="icon">👨‍💼</div>
+                <h3>Admin Login</h3>
+                <p>Manage exams, students, and results</p>
+            </div>
+            <div class="option-card" onclick="window.location='student-login.html'">
+                <div class="icon">👨‍🎓</div>
+                <h3>Student Login</h3>
+                <p>Take exams and view results</p>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features">
+            <div class="feature-item">
+                <div class="fi">🔐</div>
+                <h4>Secure Login</h4>
+                <p>Protected accounts for students and admins</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi">📝</div>
+                <h4>Online Exams</h4>
+                <p>Attempt MCQ exams with auto-timer</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi">📊</div>
+                <h4>Instant Results</h4>
+                <p>Get results immediately after submission</p>
+            </div>
+            <div class="feature-item">
+                <div class="fi">👥</div>
+                <h4>Admin Panel</h4>
+                <p>Manage students, exams and questions</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="gnav-logo">📚</div>
+                    <div class="footer-brand-name">Online Examination System</div>
+                    <div class="footer-brand-sub">Arts, Commerce & Science College, Sonai · SPPU</div>
+                    <p>A secure and easy-to-use online examination portal for students and administrators.</p>
+                    <div class="footer-makers">
+                        <div class="footer-makers-label">✨ Made with ❤️ by</div>
+                        <div class="footer-makers-names">
+                            <span class="maker-pill">👨‍💻 Mayur</span>
+                            <span class="maker-amp">&amp;</span>
+                            <span class="maker-pill">👨‍💻 Aniket</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-col-title">Navigate</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./index.html">🏠 Home</a></li>
+                        <li><a href="./pages/student-login.html">🎓 Student Login</a></li>
+                        <li><a href="./pages/student-register.html">📝 Register</a></li>
+                        <li><a href="./pages/admin-login.html">👨‍💼 Admin Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Students</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./pages/student-register.html">📋 New Registration</a></li>
+                        <li><a href="./pages/student-login.html">🔑 Login</a></li>
+                        <li><a href="./pages/student-login.html">📝 Take Exam</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Admin</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./pages/admin-login.html">🔐 Admin Login</a></li>
+                        <li><a href="./pages/student-dashboard.html">📊 Dashboard</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Online Exam System · ACS College, Sonai &nbsp;
+                </p>
+                <div class="footer-bottom-links">
+                    <a href="./index.html">Home</a>
+                    <a href="./pages/student-login.html">Student Login</a>
+                    <a href="./pages/student-register.html">Register</a>
+                    <a href="./pages/admin-login.html">Admin</a>
+                    <a href="./pages/about.html">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/shared.js"></script>
+</body>
+</html>

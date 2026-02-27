@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | Online Examination System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./../css/styles.css">
+    <style>
+        .reg-card {
+            max-width: 520px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 36px;
+            box-shadow: var(--shadow-md);
+            border: 2px solid var(--border);
+        }
+        .reg-card h2 { margin-bottom: 28px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- GLOBAL NAVBAR -->
+    <nav class="global-nav">
+        <div class="global-nav-inner">
+            <div class="gnav-brand" onclick="window.location='index.html'">
+                <div class="gnav-logo">📚</div>
+                <div class="gnav-title">Online Exam System<span>ACS College, Sonai</span></div>
+            </div>
+            <ul class="gnav-links">
+                <li><a href="./../index.html">🏠 Home</a></li>
+                <li><a href="./student-login.html">🎓 Student Login</a></li>
+                <li><a href="./student-register.html">📝 Register</a></li>
+                <li><a href="./admin-login.html">👨‍💼 Admin</a></li>
+                 <li><a href="./about.html"> ℹ️ About</a></li>
+                <li><a class="gnav-cta" href="./student-login.html">Start Exam →</a></li>
+            </ul>
+            <button class="gnav-hamburger" id="gnavHamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="gnav-mobile" id="gnavMobile">
+            <ul>
+                <li><a href="./../index.html" onclick="closeNav()">🏠 Home</a></li>
+                <li><a href="./student-login.html" onclick="closeNav()">🎓 Student Login</a></li>
+                <li><a href="./student-register.html" onclick="closeNav()">📝 Register</a></li>
+                <li><a href="./admin-login.html" onclick="closeNav()">👨‍💼 Admin Login</a></li>
+                 <li><a href="./about.html" onclick="closeNav()">About</a></li>
+            </ul>
+            <a class="gnav-mobile-cta" href="./student-login.html">🚀 Start Exam</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>📚 Online Examination System</h1>
+            <p>Arts, Commerce & Science College, Sonai</p>
+        </div>
+
+        <div id="notificationArea"></div>
+
+        <div class="content">
+            <div class="reg-card">
+                <h2>📝 Student Registration</h2>
+                <div class="form-group">
+                    <label>Roll Number</label>
+                    <input type="text" id="regStudentRollNo" placeholder="Enter your roll number">
+                </div>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="regStudentName" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="regStudentEmail" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label>Contact Number</label>
+                    <input type="text" id="regStudentContact" placeholder="Enter your 10-digit contact number">
+                </div>
+                <div class="form-group">
+                    <label>Create Password</label>
+                    <input type="password" id="regStudentPassword" placeholder="Create a password (min 6 characters)">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="regStudentConfirmPassword" placeholder="Re-enter your password">
+                </div>
+                <button class="btn btn-success" onclick="doRegister()">Register</button>
+                <button class="btn btn-secondary" onclick="window.location='student-login.html'">Back to Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <div class="gnav-logo">📚</div>
+                    <div class="footer-brand-name">Online Examination System</div>
+                    <div class="footer-brand-sub">Arts, Commerce & Science College, Sonai · SPPU</div>
+                    <p>A secure and easy-to-use online examination portal.</p>
+                    <div class="footer-makers">
+                        <div class="footer-makers-label">✨ Made with ❤️ by</div>
+                        <div class="footer-makers-names">
+                            <span class="maker-pill">👨‍💻 Mayur</span>
+                            <span class="maker-amp">&amp;</span>
+                            <span class="maker-pill">👨‍💻 Aniket</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="footer-col-title">Navigate</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./../index.html">🏠 Home</a></li>
+                        <li><a href="./student-login.html">🎓 Student Login</a></li>
+                        <li><a href="./student-register.html">📝 Register</a></li>
+                        <li><a href="./admin-login.html">👨‍💼 Admin Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Students</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./student-register.html">📋 New Registration</a></li>
+                        <li><a href="./student-login.html">🔑 Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="footer-col-title">Admin</div>
+                    <ul class="footer-col-links">
+                        <li><a href="./admin-login.html">🔐 Admin Login</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Online Exam System · ACS College, Sonai</p>
+                <div class="footer-bottom-links">
+                    <a href="./../index.html">Home</a>
+                    <a href="./student-login.html">Student Login</a>
+                    <a href="./student-register.html">Register</a>
+                    <a href="./admin-login.html">Admin</a>
+                    <a href="./pages/about.html">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./../js/shared.js"></script>
+    <script>
+        function doRegister() {
+            const rollNo          = document.getElementById('regStudentRollNo').value.trim();
+            const name            = document.getElementById('regStudentName').value.trim();
+            const email           = document.getElementById('regStudentEmail').value.trim();
+            const contact         = document.getElementById('regStudentContact').value.trim();
+            const password        = document.getElementById('regStudentPassword').value.trim();
+            const confirmPassword = document.getElementById('regStudentConfirmPassword').value.trim();
+
+            if (!rollNo || !name || !email || !contact || !password || !confirmPassword) {
+                showNotification('Please fill all fields!', 'error'); return;
+            }
+            if (appState.students.find(s => s.rollNo === rollNo)) {
+                showNotification('Roll number already registered! Please use a different roll number.', 'error'); return;
+            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showNotification('Please enter a valid email address!', 'error'); return;
+            }
+            if (contact.length !== 10 || isNaN(contact)) {
+                showNotification('Please enter a valid 10-digit contact number!', 'error'); return;
+            }
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters long!', 'error'); return;
+            }
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match!', 'error'); return;
+            }
+
+            appState.students.push({ rollNo, name, email, contact, password });
+            saveDataToStorage();
+
+            showNotification(`Registration successful! Welcome ${name}. You can now login.`, 'success');
+
+            // Clear form
+            ['regStudentRollNo','regStudentName','regStudentEmail','regStudentContact','regStudentPassword','regStudentConfirmPassword']
+                .forEach(id => document.getElementById(id).value = '');
+
+            setTimeout(() => { window.location = 'student-login.html'; }, 2000);
+        }
+    </script>
+</body>
+</html>
