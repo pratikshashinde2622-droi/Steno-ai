@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login | Online Examination System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./../css/styles.css">
     <style>
         .login-card {
@@ -18,7 +21,12 @@
             box-shadow: var(--shadow-md);
             border: 2px solid var(--border);
         }
-        .login-card h2 { margin-bottom: 28px; text-align: center; }
+
+        .login-card h2 {
+            margin-bottom: 28px;
+            text-align: center;
+        }
+
         .hint {
             margin-top: 16px;
             padding: 12px 16px;
@@ -30,6 +38,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- GLOBAL NAVBAR -->
@@ -44,7 +53,7 @@
                 <li><a href="./student-login.html">🎓 Student Login</a></li>
                 <li><a href="./student-register.html">📝 Register</a></li>
                 <li><a href="./admin-login.html">👨‍💼 Admin</a></li>
-                 <li><a href="./about.html"> ℹ️ About</a></li>
+                <li><a href="./about.html"> ℹ️ About</a></li>
                 <li><a class="gnav-cta" href="./student-login.html">Start Exam →</a></li>
             </ul>
             <button class="gnav-hamburger" id="gnavHamburger" aria-label="Toggle menu">
@@ -57,20 +66,17 @@
                 <li><a href="./student-login.html" onclick="closeNav()">🎓 Student Login</a></li>
                 <li><a href="./student-register.html" onclick="closeNav()">📝 Register</a></li>
                 <li><a href="./admin-login.html" onclick="closeNav()">👨‍💼 Admin Login</a></li>
-                 <li><a href="./about.html" onclick="closeNav()">ℹ️ About</a></li>
+                <li><a href="./about.html" onclick="closeNav()">ℹ️ About</a></li>
             </ul>
             <a class="gnav-mobile-cta" href="./student-login.html">🚀 Start Exam</a>
         </div>
     </nav>
-
     <div class="container">
         <div class="header">
             <h1>📚 Online Examination System</h1>
             <p>Arts, Commerce & Science College, Sonai</p>
         </div>
-
         <div id="notificationArea"></div>
-
         <div class="content">
             <div class="login-card">
                 <h2>👨‍💼 Admin Login</h2>
@@ -92,7 +98,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-grid">
@@ -117,7 +122,7 @@
                         <li><a href="./student-login.html">🎓 Student Login</a></li>
                         <li><a href="./student-register.html">📝 Register</a></li>
                         <li><a href="./admin-dashboard.html">👨‍💼 Admin Login</a></li>
-                         <li><a href="./about.html">About</a></li>
+                        <li><a href="./about.html">About</a></li>
                     </ul>
                 </div>
                 <div>
@@ -170,4 +175,5 @@
         });
     </script>
 </body>
+
 </html>
